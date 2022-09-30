@@ -1,0 +1,13 @@
+function require(lib)
+  if fileExists("libs/@"..lib.."/index.orp") then
+      local file = fileOpen("libs/@"..lib.."/index.orp");
+      if file then
+          local scr = fileRead(file, fileGetSize(file))
+          loadstring(scr)()
+      else
+          outputDebugString("Error to load '"..lib.."'' lib", 1, 255, 0, 0)
+      end
+  else
+      outputDebugString("Error to load '"..lib.."' lib, does not exists", 1, 255, 0, 0)
+  end
+end

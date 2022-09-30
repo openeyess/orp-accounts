@@ -1,0 +1,47 @@
+local char_to_hex = function(c)
+  return string.format("%%%02X", string.byte(c))
+end
+
+local function urlencode(url)
+  url = url:gsub("\n", "\r\n")
+  url = url:gsub("([^%w ])", char_to_hex)
+  url = url:gsub(" ", "+")
+  return url
+end
+
+local hex_to_char = function(x)
+  return string.char(tonumber(x, 16))
+end
+
+local accessKey = urlencode('0LuMj*es79PdKd821Jx6TxInxkVwEFyW')
+
+function query(sql, values, callback)
+  if not sql or not values then return 'Missing params' end
+  
+  if type(values) == 'table' then
+    if type(callback) ~= 'function' then return 'Expected a function on callback parameter' end
+    local values_character = 1
+    local sql_formatted = ''
+
+    for i = 1, #sql do
+      local character = sql:sub(i,i)
+      if character == '?' then
+        character = values[values_character]
+        values_character = values_character + 1
+      end
+      sql_formatted = sql_formatted..character
+    end
+
+    sql_formatted = urlencode(sql_formatted)
+    fetchRemote('https://website-orlando-rp.vercel.app/api/mysql?accessKey='..accessKey..'&sql='..sql_formatted, function(data)
+      data = fromJSON(data)
+      callback(data.err, data.result ~= nil and data.result[1] or data.result, data.fields ~= nil and data.fields[1] or data.fields)
+    end)
+  else
+    sql = urlencode(sql)
+    fetchRemote('https://website-orlando-rp.vercel.app/api/mysql?accessKey='..accessKey..'&sql='..sql, function(data)
+      data = fromJSON(data)
+      values(data.err, data.result ~= nil and data.result[1] or data.result, data.fields ~= nil and data.fields[1] or data.fields)
+    end)
+  end
+end
