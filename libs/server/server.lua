@@ -20,9 +20,11 @@ function()
                 end
                 account = addAccount(id_discord, 'C5B34D56EC038AC2B92DB556E293748BFECDAEF90414EFE08523D7D78F4F4F72')
                 abc:logIn(account, 'C5B34D56EC038AC2B92DB556E293748BFECDAEF90414EFE08523D7D78F4F4F72')
+                setElementData(abc, 'player_id', id)
             else
                 account = getAccount(id_discord)
-                abc:logIn(account, 'C5B34D56EC038AC2B92DB556E293748BFECDAEF90414EFE08523D7D78F4F4F72') 
+                abc:logIn(account, 'C5B34D56EC038AC2B92DB556E293748BFECDAEF90414EFE08523D7D78F4F4F72')
+                setElementData(abc, 'player_id', id)
             end
 
             query('SELECT approved FROM whitelists WHERE author_id = ?', {result.id}, 
