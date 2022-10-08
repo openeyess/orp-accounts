@@ -23,7 +23,7 @@ function()
 
                 setElementData(player, 'id', id)
 
-                triggerClientEvent(player, 'drawAccounts', player, result3.characters)
+                triggerClientEvent(player, 'drawAccountsEvent', player, result3.characters)
             end)
         end
         )

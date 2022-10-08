@@ -28,6 +28,13 @@ function dxDrawImage(x, y, w, h, ...)
     return _dxDrawImage(x, y, w, h, ...)
 end
 
+_dxDrawText = dxDrawText
+function dxDrawText (text, x, y, w, h, color, scale, ...)
+    local x, y, w, h = sx * x, sy * y, sx * w, sy * h
+    local scale = screen[2]/1100
+    return _dxDrawText (text, x, y, (x + w), (y + h), color, scale, ...)
+end
+
 function isCursorOnElement(x, y, w, h)
   local x, y, w, h = sx * x, sy * y, sx * w, sy * h
 
