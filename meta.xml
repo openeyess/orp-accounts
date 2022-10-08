@@ -1,10 +1,16 @@
 <meta>
-    <info name='Orlando RP - Autologin and Whitelist check.' author='~otiaguh' version='1.2' />
-
+    <info name="Orlando RP - Autologin and Whitelist check." author="~otiaguh" version="1.2" />
+    <min_mta_version client="1.5.8-9.20979"></min_mta_version>
+    
     <oop>true</oop>
-
-    <script src='build/main.orp' type='shared' />
-    <script src='libs/client/client.lua' type='client' />
-    <script src='libs/server/server.lua' type='server' />
-    <script src='libs/@mysql/index.orp' type='server' />
+    
+    <script src="build/main.orp" type="shared" />
+    <script src="libs/client/utils.lua" type="client" />
+    <script src="libs/client/client.lua" type="client" />
+    <script src="libs/server/server.lua" type="server" />
+    <script src="libs/@mysql/index.orp" type="server" />
+    
+    <file src="assets/images/ui/background.png" />
+    <file src="assets/images/ui/char1.png" />
+    <file src="assets/images/ui/char2.png" />
 </meta>
